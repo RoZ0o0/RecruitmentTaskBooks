@@ -1,20 +1,37 @@
 package recruitment.task.books.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import recruitment.task.books.dto.BookDTO;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import recruitment.task.books.dto.request.BookRequest;
+import recruitment.task.books.dto.response.BookResponse;
 import recruitment.task.books.service.BookService;
 
+import java.util.List;
+
 @RestController
+@CrossOrigin
 @RequestMapping("/api/books")
 public class BookController {
-    @Autowired
-    BookService bookService;
+    private final BookService bookService;
 
-    @RequestMapping("/{id}")
-    public BookDTO getBookById(@PathVariable Long id) {
+    public BookController(BookService bookService) {
+        this.bookService = bookService;
+    }
+
+    @GetMapping()
+    public List<BookResponse> getAll() { return bookService.getAll(); }
+
+    @GetMapping("/{id}")
+    public BookResponse getBookById(@PathVariable Long id) {
         return bookService.getBookById(id);
     }
+
+    @PostMapping
+    public BookResponse createBook(@RequestBody BookRequest bookRequest) { return bookService.createBook(bookRequest); }
+
+    @PutMapping("/{id}")
+    public BookResponse editBook(@PathVariable Long id, @RequestBody BookRequest bookRequest) { return bookService.editBook(id, bookRequest); }
+
+    @DeleteMapping("/{id}")
+    public HttpStatus deleteBook(@PathVariable Long id) { return bookService.deleteBook(id); }
 }

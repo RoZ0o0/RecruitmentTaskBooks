@@ -1,21 +1,75 @@
 package recruitment.task.books.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import recruitment.task.books.dto.BookDTO;
+import org.springframework.web.server.ResponseStatusException;
+import recruitment.task.books.dto.request.BookRequest;
+import recruitment.task.books.dto.response.BookResponse;
 import recruitment.task.books.entity.Book;
 import recruitment.task.books.mapper.BookMapper;
 import recruitment.task.books.repository.BookRepository;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class BookServiceimpl implements BookService {
-    @Autowired
-    BookRepository bookRepository;
+    private final BookRepository bookRepository;
+    private final BookMapper bookMapper;
+
+    public BookServiceimpl(BookRepository bookRepository, BookMapper bookMapper) {
+        this.bookRepository = bookRepository;
+        this.bookMapper = bookMapper;
+    }
 
     @Override
-    public BookDTO getBookById(Long id) {
-        Book book = bookRepository.findById(id);
+    public List<BookResponse> getAll() {
+        List<Book> entities = bookRepository.findAll();
+        List<BookResponse> bookList = bookMapper.mapToList(entities);
 
-        return BookMapper.mapToDTO(book);
+        return bookList;
+    }
+
+    @Override
+    public BookResponse getBookById(Long id) {
+        Optional<Book> optionalBook = bookRepository.findById(id);
+        if (!optionalBook.isPresent()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        return bookMapper.entityToResponse(optionalBook.get());
+    }
+
+    @Override
+    public BookResponse createBook(BookRequest bookRequest) {
+        Book book = bookMapper.mapToEntity(bookRequest);
+        if (book.getGenre() == null) {
+            throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY);
+        }
+        bookRepository.save(book);
+
+        return bookMapper.entityToResponse(book);
+    }
+
+    @Override
+    public BookResponse editBook(Long id, BookRequest bookRequest) {
+        Optional<Book> optionalBook = bookRepository.findById(id);
+        Book entity;
+        entity = optionalBook.get();
+
+        bookMapper.mapToEntity(entity, bookRequest);
+        bookRepository.save(entity);
+
+        return bookMapper.entityToResponse(entity);
+    }
+
+    @Override
+    public HttpStatus deleteBook(Long id) {
+        Optional<Book> optionalBook = bookRepository.findById(id);
+        Book entity;
+        entity = optionalBook.get();
+
+        bookRepository.delete(entity);
+
+        return HttpStatus.OK;
     }
 }

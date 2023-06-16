@@ -1,7 +1,15 @@
 package recruitment.task.books.service;
 
-import recruitment.task.books.dto.BookDTO;
+import org.springframework.http.HttpStatus;
+import recruitment.task.books.dto.request.BookRequest;
+import recruitment.task.books.dto.response.BookResponse;
+
+import java.util.List;
 
 public interface BookService {
-    BookDTO getBookById(Long id);
+    List<BookResponse> getAll();
+    BookResponse getBookById(Long id);
+    BookResponse createBook(BookRequest bookRequest);
+    BookResponse editBook(Long id, BookRequest bookRequest);
+    HttpStatus deleteBook(Long id);
 }

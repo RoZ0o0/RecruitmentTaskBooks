@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import recruitment.task.books.entity.Genre;
 
 @Getter
 @Setter
@@ -12,7 +13,7 @@ import lombok.Setter;
 public class BookResponse {
     private Long bookId;
     private String title;
-    private Long genreId;
+    private Genre genre;
     private String author;
     private String description;
 }

@@ -23,7 +23,7 @@ public class BookMapper {
         dest.setBookId(src.getBookId());
         dest.setTitle(src.getTitle());
         dest.setAuthor(src.getAuthor());
-        dest.setGenreId(src.getGenre().getGenreId());
+        dest.setGenre(src.getGenre());
         dest.setDescription(src.getDescription());
 
         return dest;

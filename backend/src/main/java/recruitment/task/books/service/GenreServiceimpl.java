@@ -3,11 +3,14 @@ package recruitment.task.books.service;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+import recruitment.task.books.dto.response.BookResponse;
 import recruitment.task.books.dto.response.GenreResponse;
+import recruitment.task.books.entity.Book;
 import recruitment.task.books.entity.Genre;
 import recruitment.task.books.mapper.GenreMapper;
 import recruitment.task.books.repository.GenreRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -19,6 +22,14 @@ public class GenreServiceimpl implements GenreService {
     public GenreServiceimpl(GenreRepository genreRepository, GenreMapper genreMapper) {
         this.genreRepository = genreRepository;
         this.genreMapper = genreMapper;
+    }
+
+    @Override
+    public List<GenreResponse> getAll() {
+        List<Genre> entities = genreRepository.findAll();
+        List<GenreResponse> genreList = genreMapper.mapToList(entities);
+
+        return genreList;
     }
 
     @Override

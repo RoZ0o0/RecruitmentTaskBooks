@@ -31,8 +31,11 @@ a {
     text-align: center;
   }
 
-  .ModalButton {
-    margin-left: 5rem;
+  .ButtonDiv {
+    display: flex;
+    margin: auto;
+    justify-content: flex-end;
+    width: 80vw;
     margin-bottom: 2rem;
   }
   

@@ -1,8 +1,10 @@
 import React from "react";
-import { createBook, getBooks, getGenres } from "../Services/HomeServices";
-import Modal from '@mui/material/Modal';
-import Box from '@mui/material/Box';
-import '../Styles/Home.css';
+import { createBook, editBook, deleteBook, getBooks, getGenres } from "../Services/HomeServices";
+import AddBookModal from "../Components/AddBookModal";
+import BookInfoModal from "../Components/BookInfoModal";
+import EditBookModal from "../Components/EditBookModal";
+import Swal from "sweetalert2";
+import "../Styles/Home.css";
 
 class Home extends React.Component {
     state = {
@@ -11,6 +13,7 @@ class Home extends React.Component {
         openAdd: false,
         openInfo: false,
         openEdit: false,
+        editId: 0,
         openedBook: {
             title: '',
             author: '',
@@ -39,14 +42,14 @@ class Home extends React.Component {
         })
     }
 
-    openInfoModal = (bookId) => {
+    openInfoModal = (index) => {
         this.setState({
             openInfo: true,
             openedBook: {
-                title: this.state.books[bookId].title,
-                author: this.state.books[bookId].author,
-                genreId: this.state.books[bookId].genre.genreId,
-                description: this.state.books[bookId].description,
+                title: this.state.books[index].title,
+                author: this.state.books[index].author,
+                genreId: this.state.books[index].genre.genreId,
+                description: this.state.books[index].description,
             }
         })
     }
@@ -57,14 +60,15 @@ class Home extends React.Component {
         })
     }
 
-    openEditModal = (bookId) => {
+    openEditModal = (index, bookId) => {
         this.setState({
             openEdit: true,
+            editId: bookId,
             openedBook: {
-                title: this.state.books[bookId].title,
-                author: this.state.books[bookId].author,
-                genreId: this.state.books[bookId].genre.genreId,
-                description: this.state.books[bookId].description,
+                title: this.state.books[index].title,
+                author: this.state.books[index].author,
+                genreId: this.state.books[index].genre.genreId,
+                description: this.state.books[index].description,
             }
         })
     }
@@ -129,6 +133,67 @@ class Home extends React.Component {
         }
     }
 
+    async editBook(bookId, book) {
+        if (book.title === '' || book.title === undefined || book.title.length < 1) {
+            this.setState({
+                error: 'Tytuł jest pusty!'
+            })
+        } else if (book.genreId < 1) {
+            this.setState({
+                error: 'Gatunek jest błędny!'
+            })
+        } else if (book.author === '' || book.author === undefined) {
+            this.setState({
+                error: 'Autor jest pusty!'
+            })
+        } else if (book.author.length < 6) {
+            this.setState({
+                error: 'Podany autor jest za krótki!'
+            })
+        } else if (book.author.length > 30) {
+            this.setState({
+                error: 'Podany autor jest za długi!'
+            })
+        } else if (book.description.length < 30) {
+            this.setState({
+                error: 'Podany opis jest za krótki!'
+            })
+        } else if (book.description.length > 300) {
+            this.setState({
+                error: 'Podany opis jest za długi!'
+            })
+        } else {
+            await editBook(bookId, book);
+            this.closeEditModal();
+        }
+    }
+
+    async deleteBook(bookId) {
+        await deleteBook(bookId);
+    }
+
+    async deleteAlert(bookId) {
+        Swal.fire({
+            title: 'Jesteś pewien?',
+            text: "Nie będziesz mógł tego cofnąć!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Anuluj',
+            confirmButtonText: 'Tak, usuń!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                this.deleteBook(bookId);
+                Swal.fire(
+                'Usunięto!',
+                'Książka została usunięta.',
+                'success'
+                )
+            }
+        })
+    }
+
     async componentDidMount() {
         await getBooks().then((res) => {
             const books = res.data;
@@ -149,117 +214,54 @@ class Home extends React.Component {
     
     render() {
         return (
-            <div>
-                <Modal
-                    open={this.state.openAdd}
-                    onClose={this.closeAddModal}
-                >
-                    <Box className='ModalBox'>
-                        <h1>Dodaj książkę</h1>
-                        <div>
-                            <label>Tytuł</label><input type="text" name="title" onChange={this.changeBookCreate} />
-                        </div>
-                        <div>
-                            <label>Gatunek</label>
-                            <select name="genreId" onChange={this.changeBookCreate}>
-                                {
-                                    this.state.genres.map((genre) => 
-                                        <option key={genre.genreId} value={genre.genreId}>{genre.genreName}</option>
-                                    )
-                                }
-                            </select>
-                        </div>
-                        <div>
-                            <label>Autor</label><input type="text" name="author" onChange={this.changeBookCreate} />
-                        </div>
-                        <div>
-                            <label>Opis</label><textarea name="description" onChange={this.changeBookCreate} />
-                        </div>
-                        <button onClick={() => this.addBook(this.state)}>Dodaj książkę</button>
-                        {this.state.error && <p>{ this.state.error }</p> }
-                    </Box>
-                </Modal>
-                <Modal
-                    open={this.state.openInfo}
-                    onClose={this.closeInfoModal}
-                >
-                    <Box className='ModalBox'>
-                        <h1>Książka</h1>
-                        <div>
-                            <label>Tytuł</label><p>{this.state.openedBook.title}</p>
-                        </div>
-                        <div>
-                            <label>Gatunek</label>
-                            <select name="genreId" value={this.state.openedBook.genreId} readOnly>
-                                <option value="1">Horror</option>
-                                <option value="2">Dramat</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label>Autor</label><p>{this.state.openedBook.author}</p>
-                        </div>
-                        <div>
-                            <label>Opis</label><textarea name="description" value={this.state.openedBook.description} readOnly />
-                        </div>
-                    </Box>
-                </Modal>
-                <Modal
-                    open={this.state.openEdit}
-                    onClose={this.closeEditModal}
-                >
-                    <Box className='ModalBox'>
-                        <h1>Edytuj książkę</h1>
-                        <div>
-                            <label>Tytuł</label><input type="text" name="title" value={this.state.openedBook.title} onChange={this.changeBookEdit} />
-                        </div>
-                        <div>
-                            <label>Gatunek</label>
-                            <select name="genreId" value={this.state.openedBook.genreId} onChange={this.changeBookEdit}>
-                                {
-                                    this.state.genres.map((genre) => 
-                                        <option key={genre.genreId} value={genre.genreId}>{genre.genreName}</option>
-                                    )
-                                }
-                            </select>
-                        </div>
-                        <div>
-                            <label>Autor</label><input type="text" name="author" value={this.state.openedBook.author} onChange={this.changeBookEdit} />
-                        </div>
-                        <div>
-                            <label>Opis</label><textarea name="description" value={this.state.openedBook.description} onChange={this.changeBookEdit} />
-                        </div>
-                        <button onClick={() => this.addBook(this.state)}>Dodaj książkę</button>
-                        {this.state.error && <p>{ this.state.error }</p> }
-                    </Box>
-                </Modal>
-                <h2>Books</h2>
-                <div className="ButtonDiv">
-                    <button className="ModalButton" onClick={this.openAddModal}>Dodaj książkę</button>
+            <>
+                <div>
+                    <h2>Books</h2>
+                    <div className="ButtonDiv">
+                        <button className="ModalButton" onClick={this.openAddModal}>Dodaj książkę</button>
+                    </div>
+                    <table className="BookTable">
+                        <thead>
+                            <tr>
+                                <th>Tytuł</th>
+                                <th>Gatunek</th>
+                                <th>Akcja</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                this.state.books.map((book, index) => 
+                                    <tr key={book.bookId}>
+                                        <td>{book.title}</td>
+                                        <td>{book.genre.genreName}</td>
+                                        <td>
+                                            <button onClick={() => this.openInfoModal(index)}>Info</button>
+                                            <button onClick={() => this.openEditModal(index, book.bookId)}>Edit</button>
+                                            <button onClick={() => this.deleteAlert(book.bookId)}>Delete</button>
+                                        </td>
+                                    </tr>
+                                )
+                            }
+                        </tbody>
+                    </table>
                 </div>
-                <table className="BookTable">
-                    <thead>
-                        <tr>
-                            <th>Tytuł</th>
-                            <th>Gatunek</th>
-                            <th>Akcja</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            this.state.books.map((book, index) => 
-                                <tr key={book.bookId}>
-                                    <td>{book.title}</td>
-                                    <td>{book.genre.genreName}</td>
-                                    <td>
-                                        <button onClick={() => this.openInfoModal(index)}>Info</button>
-                                        <button onClick={() => this.openEditModal(index)}>Edit</button>
-                                    </td>
-                                </tr>
-                            )
-                        }
-                    </tbody>
-                </table>
-            </div>
+                <AddBookModal
+                    state={this.state}
+                    changeBookCreate={this.changeBookCreate}
+                    closeAddModal={this.closeAddModal}
+                    addBook={() => this.addBook(this.state)}
+                 />
+                <BookInfoModal
+                    state={this.state}
+                    closeInfoModal={this.closeInfoModal}
+                />
+                <EditBookModal
+                    state={this.state}
+                    changeBookEdit={this.changeBookEdit}
+                    closeEditModal={this.closeEditModal}
+                    editBook={() => this.editBook(this.state.editId, this.state.openedBook)}
+                />
+            </>
         );
     }
 };

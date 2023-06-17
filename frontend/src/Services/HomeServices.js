@@ -15,3 +15,7 @@ export const createBook = (book) => {
 export const editBook = (id, book) => {
     return axios.put(`http://localhost:8080/api/books/` + id, book);
 }
+
+export const deleteBook = (id) => {
+    return axios.delete(`http://localhost:8080/api/books/` + id);
+}

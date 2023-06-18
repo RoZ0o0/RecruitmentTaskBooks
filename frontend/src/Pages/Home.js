@@ -127,9 +127,14 @@ class Home extends React.Component {
                 error: 'Podany opis jest za długi!'
             })
         } else {
-            console.log(state.book);
             await createBook(state.book);
             this.closeAddModal();
+            this.getBooks();
+            Swal.fire(
+                'Dodano!',
+                'Książka została dodana.',
+                'success'
+            )
         }
     }
 
@@ -165,11 +170,18 @@ class Home extends React.Component {
         } else {
             await editBook(bookId, book);
             this.closeEditModal();
+            this.getBooks();
+            Swal.fire(
+                'Edytowano!',
+                'Książka została edytowana.',
+                'success'
+            )
         }
     }
 
     async deleteBook(bookId) {
         await deleteBook(bookId);
+        this.getBooks();
     }
 
     async deleteAlert(bookId) {
@@ -194,7 +206,7 @@ class Home extends React.Component {
         })
     }
 
-    async componentDidMount() {
+    async getBooks() {
         await getBooks().then((res) => {
             const books = res.data;
             this.setState({ books })
@@ -205,7 +217,10 @@ class Home extends React.Component {
                 this.errorStatus = error.response.data.message;
             }
         });
+    }
 
+    async componentDidMount() {
+        this.getBooks();
         await getGenres().then((res) => {
             const genres = res.data;
             this.setState({ genres })

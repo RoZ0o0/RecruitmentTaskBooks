@@ -1,5 +1,6 @@
 package recruitment.task.books.mapper;
 
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import recruitment.task.books.dto.request.BookRequest;
 import recruitment.task.books.dto.response.BookResponse;
@@ -50,6 +51,15 @@ public class BookMapper {
     public List<BookResponse> mapToList(List<Book> srcList) {
         List<BookResponse> destList = new ArrayList<>();
         for(Book srcEntity: srcList) {
+            destList.add(entityToResponse(srcEntity));
+        }
+
+        return destList;
+    }
+
+    public List<BookResponse> mapToListPage(Page<Book> srcPage) {
+        List<BookResponse> destList = new ArrayList<>();
+        for (Book srcEntity : srcPage) {
             destList.add(entityToResponse(srcEntity));
         }
 

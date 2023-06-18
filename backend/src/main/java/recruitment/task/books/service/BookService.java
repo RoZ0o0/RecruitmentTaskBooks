@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface BookService {
     List<BookResponse> getAll();
+    List<BookResponse> getAllPaginated(int page, int size);
     BookResponse getBookById(Long id);
     BookResponse createBook(BookRequest bookRequest);
     BookResponse editBook(Long id, BookRequest bookRequest);

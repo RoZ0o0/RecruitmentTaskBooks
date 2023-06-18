@@ -21,6 +21,9 @@ public class BookController {
     @GetMapping()
     public List<BookResponse> getAll() { return bookService.getAll(); }
 
+    @GetMapping("/getPage")
+    public List<BookResponse> getAllPaginated(@RequestParam int page, @RequestParam int size) { return bookService.getAllPaginated(page, size); }
+
     @GetMapping("/{id}")
     public BookResponse getBookById(@PathVariable Long id) {
         return bookService.getBookById(id);

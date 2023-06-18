@@ -1,5 +1,8 @@
 package recruitment.task.books.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -25,9 +28,16 @@ public class BookServiceimpl implements BookService {
     @Override
     public List<BookResponse> getAll() {
         List<Book> entities = bookRepository.findAll();
-        List<BookResponse> bookList = bookMapper.mapToList(entities);
 
-        return bookList;
+        return bookMapper.mapToList(entities);
+    }
+
+    @Override
+    public List<BookResponse> getAllPaginated(int page, int size) {
+        Pageable getPage = PageRequest.of(page, size);
+        Page<Book> entities = bookRepository.findAll(getPage);
+
+        return bookMapper.mapToListPage(entities);
     }
 
     @Override

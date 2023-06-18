@@ -1,15 +1,31 @@
 import React from "react";
-import { createBook, editBook, deleteBook, getBooks, getGenres } from "../Services/HomeServices";
+
+import { createBook, editBook, deleteBook, getBooks, getBooksPaginated, getGenres } from "../Services/HomeServices";
+import { TablePagination } from "@mui/material";
+
+import DescriptionIcon from '@mui/icons-material/Description';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import AddIcon from '@mui/icons-material/Add';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
+
 import AddBookModal from "../Components/AddBookModal";
 import BookInfoModal from "../Components/BookInfoModal";
 import EditBookModal from "../Components/EditBookModal";
 import Swal from "sweetalert2";
+
 import "../Styles/Home.css";
 
 class Home extends React.Component {
     state = {
         books: [],
         genres: [],
+        currentPage: 0,
+        total: 0,
+        order: true,
+        sort: 'title',
+        pageSize: 5,
         openAdd: false,
         openInfo: false,
         openEdit: false,
@@ -95,6 +111,39 @@ class Home extends React.Component {
                 [event.target.name]: event.target.value
             }
         });
+    }
+
+    sortTitle = () => {
+        this.setState({
+            sort: 'title',
+            order: !this.state.order,
+            currentPage: 0
+        });
+        this.getBooksPaginated(0, this.state.pageSize, !this.state.order, 'title');
+    }
+
+    sortGenre = () => {
+        this.setState({
+            sort: 'genre.genreName',
+            order: !this.state.order,
+            currentPage: 0
+        })
+        this.getBooksPaginated(0, this.state.pageSize, !this.state.order, 'genre.genreName');
+    }
+
+    pageChange = (event, newPage) => {
+        this.setState({
+            currentPage: (newPage)
+        })
+        this.getBooksPaginated(newPage, this.state.pageSize, this.state.order, this.state.sort);
+    }
+
+    pageSizeChange = (event) => {
+        this.setState({
+            pageSize: parseInt(event.target.value, 10),
+            currentPage: 0
+        })
+        this.getBooksPaginated(0, parseInt(event.target.value, 10), this.state.order, this.state.sort);
     }
 
     async addBook(state) {
@@ -208,8 +257,8 @@ class Home extends React.Component {
 
     async getBooks() {
         await getBooks().then((res) => {
-            const books = res.data;
-            this.setState({ books })
+            const total = res.data.length;
+            this.setState({ total });
         }).catch(error => {
             if (!error.response) {
                 this.errorStatus = 'Network Error';
@@ -219,8 +268,16 @@ class Home extends React.Component {
         });
     }
 
+    async getBooksPaginated(currentPage, pageSize, order, sort) {
+        await getBooksPaginated(currentPage, pageSize, order, sort).then((res) => {
+            const books = res.data;
+            this.setState({ books });
+        });
+    }
+
     async componentDidMount() {
         this.getBooks();
+        this.getBooksPaginated(this.state.currentPage, this.state.pageSize, this.state.order, this.state.sort);
         await getGenres().then((res) => {
             const genres = res.data;
             this.setState({ genres })
@@ -233,14 +290,42 @@ class Home extends React.Component {
                 <div>
                     <h2>Books</h2>
                     <div className="ButtonDiv">
-                        <button className="ModalButton" onClick={this.openAddModal}>Dodaj książkę</button>
+                        <AddIcon className="ModalButton" onClick={this.openAddModal} />
                     </div>
                     <table className="BookTable">
                         <thead>
                             <tr>
-                                <th>Tytuł</th>
-                                <th>Gatunek</th>
-                                <th>Akcja</th>
+                                <th className="TableHeader">
+                                    <div>
+                                        <span>Tytuł</span>
+                                        {(this.state.order === true && this.state.sort === 'title') &&
+                                            <ArrowDropDownIcon onClick={this.sortTitle}/>
+                                        }
+                                        {(this.state.order === false && this.state.sort === 'title') &&
+                                            <ArrowDropUpIcon onClick={this.sortTitle} />
+                                        }
+                                        {this.state.sort !== 'title' &&
+                                            <ArrowDropDownIcon onClick={this.sortTitle}/>
+                                        }
+                                    </div>
+                                </th>
+                                <th className="TableHeader">
+                                    <div>
+                                        <span>Gatunek</span>
+                                        {(this.state.order === true && this.state.sort === 'genre.genreName') &&
+                                            <ArrowDropDownIcon onClick={this.sortGenre}/>
+                                        }
+                                        {(this.state.order === false && this.state.sort === 'genre.genreName') &&
+                                            <ArrowDropUpIcon onClick={this.sortGenre} />
+                                        }
+                                        {this.state.sort !== 'genre.genreName' &&
+                                            <ArrowDropDownIcon onClick={this.sortGenre}/>
+                                        }
+                                    </div>
+                                </th>
+                                <th className="TableHeader">
+                                    Akcja
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -249,16 +334,32 @@ class Home extends React.Component {
                                     <tr key={book.bookId}>
                                         <td>{book.title}</td>
                                         <td>{book.genre.genreName}</td>
-                                        <td>
-                                            <button onClick={() => this.openInfoModal(index)}>Info</button>
-                                            <button onClick={() => this.openEditModal(index, book.bookId)}>Edit</button>
-                                            <button onClick={() => this.deleteAlert(book.bookId)}>Delete</button>
+                                        <td className="TableData">
+                                            <DescriptionIcon onClick={() => this.openInfoModal(index)} />
+                                            <EditIcon onClick={() => this.openEditModal(index, book.bookId)} />
+                                            <DeleteIcon onClick={() => this.deleteAlert(book.bookId)} />
                                         </td>
                                     </tr>
                                 )
                             }
                         </tbody>
                     </table>
+                    <TablePagination 
+                        component="div"
+                        className="TablePagination"
+                        count={this.state.total}
+                        page={this.state.currentPage}
+                        onPageChange={this.pageChange}
+                        rowsPerPage={this.state.pageSize}
+                        onRowsPerPageChange={this.pageSizeChange}
+                        rowsPerPageOptions={[5, 10]}
+                        labelRowsPerPage="Wiersze na strone:"
+                        labelDisplayedRows={
+                            ({ from, to, count }) => {
+                                return '' + from + '-' + to + ' do ' + count
+                            }
+                        }
+                    />
                 </div>
                 <AddBookModal
                     state={this.state}

@@ -12,6 +12,14 @@ a {
     border-spacing: 0;
   }
 
+  .TableHeader {
+    width: calc(100% / 3);
+  }
+
+  .TableHeader svg, .TableHeader span{
+    vertical-align: middle;
+  }
+
   .ModalBox {
     position: absolute;
     top: 50%;
@@ -31,12 +39,20 @@ a {
     text-align: center;
   }
 
-  .ButtonDiv {
+  .ButtonDiv, .TablePagination {
     display: flex;
     margin: auto;
     justify-content: flex-end;
+    align-items: center;
     width: 80vw;
     margin-bottom: 2rem;
+  }
+
+  .TableData {
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
   }
   
   .BookTable thead tr th{

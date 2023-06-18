@@ -22,7 +22,7 @@ public class BookController {
     public List<BookResponse> getAll() { return bookService.getAll(); }
 
     @GetMapping("/getPage")
-    public List<BookResponse> getAllPaginated(@RequestParam int page, @RequestParam int size) { return bookService.getAllPaginated(page, size); }
+    public List<BookResponse> getAllPaginated(@RequestParam int page, @RequestParam int size, @RequestParam Boolean order, @RequestParam String sort) { return bookService.getAllPaginated(page, size, order, sort); }
 
     @GetMapping("/{id}")
     public BookResponse getBookById(@PathVariable Long id) {

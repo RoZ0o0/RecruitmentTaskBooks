@@ -27,9 +27,8 @@ public class GenreServiceimpl implements GenreService {
     @Override
     public List<GenreResponse> getAll() {
         List<Genre> entities = genreRepository.findAll();
-        List<GenreResponse> genreList = genreMapper.mapToList(entities);
 
-        return genreList;
+        return genreMapper.mapToList(entities);
     }
 
     @Override

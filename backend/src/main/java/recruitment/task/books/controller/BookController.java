@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import recruitment.task.books.dto.request.BookRequest;
 import recruitment.task.books.dto.response.BookResponse;
+import recruitment.task.books.entity.Book;
 import recruitment.task.books.service.BookService;
 
 @RestController
@@ -22,11 +23,6 @@ public class BookController {
 
     @GetMapping("/search")
     public Page<BookResponse> searchBook(@RequestParam int page, @RequestParam int size, @RequestParam Boolean order, @RequestParam String sort, @RequestParam String search) { return bookService.searchBook(page, size, order, sort, search); }
-
-    @GetMapping("/{id}")
-    public BookResponse getBookById(@PathVariable Long id) {
-        return bookService.getBookById(id);
-    }
 
     @PostMapping
     public BookResponse createBook(@RequestBody BookRequest bookRequest) { return bookService.createBook(bookRequest); }

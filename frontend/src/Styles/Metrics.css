@@ -1,0 +1,42 @@
+.MetricTable {
+    margin: auto;
+    border: 1px gray solid;
+    border-radius: 0.5rem;
+    box-shadow: 2px 2px 2px 2px gray;
+    width: 30vw;
+    border-spacing: 0;
+  }
+
+.TableHeader {
+    width: calc(100% / 2);
+}
+
+.TableHeader svg, .TableHeader span{
+    vertical-align: middle;
+}
+
+.TableData {
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+  }
+  
+.MetricTable thead tr th{
+    background-color: gray;
+    padding: 0.5rem;
+}
+
+.MetricTable thead tr:first-child th:first-child {
+    border-top-left-radius: 0.3rem;
+}
+
+.MetricTable thead tr:first-child th:last-child {
+    border-top-right-radius: 0.3rem;
+}
+
+
+.MetricTable td {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}

@@ -1,89 +1,89 @@
 a {
-    text-decoration: none;
-    margin: auto;
-  }
+  text-decoration: none;
+  margin: auto;
+}
+
+.BookTable {
+  margin: auto;
+  border: 1px gray solid;
+  border-radius: 0.5rem;
+  box-shadow: 2px 2px 2px 2px gray;
+  width: 80vw;
+  border-spacing: 0;
+}
+
+.TableHeader {
+  width: calc(100% / 4);
+}
+
+.TableHeader svg, .TableHeader span{
+  vertical-align: middle;
+}
+
+.ModalBox {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  border: '2px solid #000';
+  background-color: beige;
+  box-shadow: 24;
+  padding-top: 2rem;
+  padding-inline: 4rem;
+  padding-bottom: 3rem;
+  border-radius: 0.5rem;
+}
+
+.ModalBox h1 {
+  text-align: center;
+}
+
+.ToolBar {
+  display: flex;
+  margin: auto;
+  justify-content: space-between;
+  vertical-align: middle;
+  align-items: center;
+  width: 80vw;
+  margin-bottom: 2rem;
+}
+
+.SearchBar svg {
+  vertical-align: middle;
+}
+
+.TablePagination {
+  display: flex;
+  margin: auto;
+  justify-content: flex-end;
+  align-items: center;
+  width: 80vw;
+  margin-bottom: 2rem;
+}
+
+.TableData {
+  display: flex;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.BookTable thead tr th{
+  background-color: gray;
+  padding: 0.5rem;
+}
   
-  .BookTable {
-    margin: auto;
-    border: 1px gray solid;
-    border-radius: 0.5rem;
-    box-shadow: 2px 2px 2px 2px gray;
-    width: 80vw;
-    border-spacing: 0;
-  }
+.BookTable thead tr:first-child th:first-child {
+  border-top-left-radius: 0.3rem;
+}
 
-  .TableHeader {
-    width: calc(100% / 4);
-  }
+.BookTable thead tr:first-child th:last-child {
+  border-top-right-radius: 0.3rem;
+}
 
-  .TableHeader svg, .TableHeader span{
-    vertical-align: middle;
-  }
 
-  .ModalBox {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 400px;
-    border: '2px solid #000';
-    background-color: beige;
-    box-shadow: 24;
-    padding-top: 2rem;
-    padding-inline: 4rem;
-    padding-bottom: 3rem;
-    border-radius: 0.5rem;
-  }
-
-  .ModalBox h1 {
-    text-align: center;
-  }
-
-  .ToolBar {
-    display: flex;
-    margin: auto;
-    justify-content: space-between;
-    vertical-align: middle;
-    align-items: center;
-    width: 80vw;
-    margin-bottom: 2rem;
-  }
-
-  .SearchBar svg {
-    vertical-align: middle;
-  }
-
-  .TablePagination {
-    display: flex;
-    margin: auto;
-    justify-content: flex-end;
-    align-items: center;
-    width: 80vw;
-    margin-bottom: 2rem;
-  }
-
-  .TableData {
-    display: flex;
-    margin: auto;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .BookTable thead tr th{
-    background-color: gray;
-    padding: 0.5rem;
-  }
-  
-  .BookTable thead tr:first-child th:first-child {
-    border-top-left-radius: 0.3rem;
-  }
-
-  .BookTable thead tr:first-child th:last-child {
-    border-top-right-radius: 0.3rem;
-  }
-  
-  
-  .BookTable td {
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-  }
+.BookTable td {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}

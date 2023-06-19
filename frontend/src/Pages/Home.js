@@ -1,6 +1,6 @@
 import React from "react";
 
-import { createBook, editBook, deleteBook, getBooks, getBooksPaginated, searchBooks, getGenres } from "../Services/HomeServices";
+import { createBook, editBook, deleteBook, getBooksPaginated, searchBooks, getGenres } from "../Services/HomeServices";
 import { TablePagination } from "@mui/material";
 
 import DescriptionIcon from '@mui/icons-material/Description';
@@ -302,6 +302,7 @@ class Home extends React.Component {
         await getBooksPaginated(currentPage, pageSize, order, sort).then((res) => {
             const books = res.data.content;
             const total = res.data.totalElements;
+            console.log(res);
             this.setState({ 
                 books,
                 total
@@ -332,7 +333,7 @@ class Home extends React.Component {
         return (
             <>
                 <div>
-                    <h2>Books</h2>
+                    <h2>Książki</h2>
                     <div className="ToolBar">
                         <div className="SearchBar">
                             <input type="text" onChange={this.changeSearchBook}/>

@@ -1,0 +1,20 @@
+.NavBar {
+    display: flex;
+    background-color: antiquewhite;
+    height: 3rem;
+    align-items: center;
+    justify-content: center;
+    padding-inline: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+    box-shadow: 1px 1px 1px 1px black;
+    user-select: none;
+}
+
+.NavBar-itemDiv {
+    width: 10rem;
+}
+
+.NavBar-item.active {
+    color: red;
+}

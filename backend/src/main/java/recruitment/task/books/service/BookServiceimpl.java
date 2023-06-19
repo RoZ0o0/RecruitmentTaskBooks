@@ -28,6 +28,14 @@ public class BookServiceimpl implements BookService {
         this.bookValidator = bookValidator;
     }
 
+    public Book getBookById(Long id) {
+        Optional<Book> optionalBook = bookRepository.findById(id);
+        if (!optionalBook.isPresent()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        return optionalBook.get();
+    }
+
     @Override
     public Page<BookResponse> getAllPaginated(int page, int size, Boolean order, String sortBy) {
         Pageable getPage;
@@ -87,15 +95,6 @@ public class BookServiceimpl implements BookService {
     }
 
     @Override
-    public BookResponse getBookById(Long id) {
-        Optional<Book> optionalBook = bookRepository.findById(id);
-        if (!optionalBook.isPresent()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
-        return bookMapper.entityToResponse(optionalBook.get());
-    }
-
-    @Override
     public BookResponse createBook(BookRequest bookRequest) {
         if (!bookValidator.validateBook(bookRequest)) {
             throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY);
@@ -109,18 +108,11 @@ public class BookServiceimpl implements BookService {
 
     @Override
     public BookResponse editBook(Long id, BookRequest bookRequest) {
-        Optional<Book> optionalBook = bookRepository.findById(id);
-        Book book;
+        Book book = getBookById(id);
 
         if (!bookValidator.validateBook(bookRequest)) {
             throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY);
         }
-
-        if (!optionalBook.isPresent()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
-
-        book = optionalBook.get();
 
         bookMapper.mapToEntity(book, bookRequest);
         bookRepository.save(book);
@@ -130,14 +122,7 @@ public class BookServiceimpl implements BookService {
 
     @Override
     public HttpStatus deleteBook(Long id) {
-        Optional<Book> optionalBook = bookRepository.findById(id);
-        Book book;
-
-        if (!optionalBook.isPresent()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
-
-        book = optionalBook.get();
+        Book book = getBookById(id);
 
         bookRepository.delete(book);
 

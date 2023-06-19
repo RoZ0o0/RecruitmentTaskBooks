@@ -5,6 +5,7 @@ import {
   Routes
 } from 'react-router-dom';
 import Home from './Pages/Home';
+import Metrics from './Pages/Metrics';
 import NavBar from './Components/NavBar';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
       <div className="Content">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/metrics" element={<Metrics />} />
         </Routes>
       </div>
     </div>

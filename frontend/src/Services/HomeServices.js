@@ -1,9 +1,5 @@
 import axios from 'axios';
 
-export const getBooks = () => {
-    return axios.get(`http://localhost:8080/api/books`);
-}
-
 export const getBooksPaginated = (page, size, order, sort) => {
     return axios.get(`http://localhost:8080/api/books/getPage?page=` + page + `&size=` + size + `&order=` + order + `&sort=` + sort);
 }

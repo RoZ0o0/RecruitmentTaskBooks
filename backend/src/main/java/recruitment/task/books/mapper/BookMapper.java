@@ -1,14 +1,10 @@
 package recruitment.task.books.mapper;
 
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import recruitment.task.books.dto.request.BookRequest;
 import recruitment.task.books.dto.response.BookResponse;
 import recruitment.task.books.entity.Book;
 import recruitment.task.books.repository.GenreRepository;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Component
 public class BookMapper {
@@ -46,23 +42,5 @@ public class BookMapper {
         dest.setAuthor(src.getAuthor());
         dest.setGenre(genreRepository.findById(src.getGenreId()).orElse(null));
         dest.setDescription(src.getDescription());
-    }
-
-    public List<BookResponse> mapToList(List<Book> srcList) {
-        List<BookResponse> destList = new ArrayList<>();
-        for(Book srcEntity: srcList) {
-            destList.add(entityToResponse(srcEntity));
-        }
-
-        return destList;
-    }
-
-    public List<BookResponse> mapToListPage(Page<Book> srcPage) {
-        List<BookResponse> destList = new ArrayList<>();
-        for (Book srcEntity : srcPage) {
-            destList.add(entityToResponse(srcEntity));
-        }
-
-        return destList;
     }
 }

@@ -1,9 +1,7 @@
 package recruitment.task.books.service;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -14,7 +12,9 @@ import recruitment.task.books.mapper.BookMapper;
 import recruitment.task.books.repository.BookRepository;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Function;
 
 @Service
 public class BookServiceimpl implements BookService {
@@ -27,14 +27,7 @@ public class BookServiceimpl implements BookService {
     }
 
     @Override
-    public List<BookResponse> getAll() {
-        List<Book> entities = bookRepository.findAll();
-
-        return bookMapper.mapToList(entities);
-    }
-
-    @Override
-    public List<BookResponse> getAllPaginated(int page, int size, Boolean order, String sortBy) {
+    public Page<BookResponse> getAllPaginated(int page, int size, Boolean order, String sortBy) {
         Pageable getPage;
 
         if (order) {
@@ -43,9 +36,44 @@ public class BookServiceimpl implements BookService {
             getPage = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, sortBy));
         }
 
-        Page<Book> entities = bookRepository.findAll(getPage);
+        Page<Book> bookPageList = bookRepository.findAll(getPage);
 
-        return bookMapper.mapToListPage(entities);
+        Page<BookResponse> responseBookPage = bookPageList.map(new Function<Book, BookResponse>() {
+            @Override
+            public BookResponse apply(Book book) {
+                return bookMapper.entityToResponse(book);
+            }
+        });
+
+        return responseBookPage;
+    }
+
+    @Override
+    public Page<BookResponse> searchBook(int page, int size, Boolean order, String sortBy, String search) {
+        Pageable getPage;
+        Page<Book> bookPageList;
+
+        if (order) {
+            getPage = PageRequest.of(page, size, Sort.by(Sort.Direction.ASC, sortBy));
+        } else {
+            getPage = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, sortBy));
+        }
+
+        if (Objects.equals(search, "")) {
+            bookPageList = bookRepository.findAll(getPage);
+        } else {
+            Specification<Book> specification = BookRepository.search(search);
+            bookPageList = bookRepository.findAll(specification, getPage);
+        }
+
+        Page<BookResponse> responseBookPage = bookPageList.map(new Function<Book, BookResponse>() {
+            @Override
+            public BookResponse apply(Book book) {
+                return bookMapper.entityToResponse(book);
+            }
+        });
+
+        return responseBookPage;
     }
 
     @Override
@@ -71,22 +99,22 @@ public class BookServiceimpl implements BookService {
     @Override
     public BookResponse editBook(Long id, BookRequest bookRequest) {
         Optional<Book> optionalBook = bookRepository.findById(id);
-        Book entity;
-        entity = optionalBook.get();
+        Book book;
+        book = optionalBook.get();
 
-        bookMapper.mapToEntity(entity, bookRequest);
-        bookRepository.save(entity);
+        bookMapper.mapToEntity(book, bookRequest);
+        bookRepository.save(book);
 
-        return bookMapper.entityToResponse(entity);
+        return bookMapper.entityToResponse(book);
     }
 
     @Override
     public HttpStatus deleteBook(Long id) {
         Optional<Book> optionalBook = bookRepository.findById(id);
-        Book entity;
-        entity = optionalBook.get();
+        Book book;
+        book = optionalBook.get();
 
-        bookRepository.delete(entity);
+        bookRepository.delete(book);
 
         return HttpStatus.OK;
     }

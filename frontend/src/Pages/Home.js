@@ -1,6 +1,6 @@
 import React from "react";
 
-import { createBook, editBook, deleteBook, getBooks, getBooksPaginated, getGenres } from "../Services/HomeServices";
+import { createBook, editBook, deleteBook, getBooks, getBooksPaginated, searchBooks, getGenres } from "../Services/HomeServices";
 import { TablePagination } from "@mui/material";
 
 import DescriptionIcon from '@mui/icons-material/Description';
@@ -9,6 +9,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
+import SearchIcon from '@mui/icons-material/Search';
 
 import AddBookModal from "../Components/AddBookModal";
 import BookInfoModal from "../Components/BookInfoModal";
@@ -25,6 +26,7 @@ class Home extends React.Component {
         total: 0,
         order: true,
         sort: 'title',
+        search: '',
         pageSize: 5,
         openAdd: false,
         openInfo: false,
@@ -113,13 +115,23 @@ class Home extends React.Component {
         });
     }
 
+    changeSearchBook = (event) => {
+        this.setState({
+            search: event.target.value
+        });
+    }
+
     sortTitle = () => {
         this.setState({
             sort: 'title',
             order: !this.state.order,
             currentPage: 0
         });
-        this.getBooksPaginated(0, this.state.pageSize, !this.state.order, 'title');
+        if (this.state.search === "") {
+            this.getBooksPaginated(0, this.state.pageSize, !this.state.order, 'title');
+        } else {
+            this.searchBooks(0, this.state.pageSize, this.state.order, 'title', this.state.search);
+        }
     }
 
     sortGenre = () => {
@@ -128,14 +140,35 @@ class Home extends React.Component {
             order: !this.state.order,
             currentPage: 0
         })
-        this.getBooksPaginated(0, this.state.pageSize, !this.state.order, 'genre.genreName');
+        if (this.state.search === "") {
+            this.getBooksPaginated(0, this.state.pageSize, !this.state.order, 'genre.genreName');
+        } else {
+            this.searchBooks(0, this.state.pageSize, this.state.order, 'genre.genreName', this.state.search);
+        }
+    }
+
+    sortAuthor = () => {
+        this.setState({
+            sort: 'author',
+            order: !this.state.order,
+            currentPage: 0
+        })
+        if (this.state.search === "") {
+            this.getBooksPaginated(0, this.state.pageSize, !this.state.order, 'author');
+        } else {
+            this.searchBooks(0, this.state.pageSize, this.state.order, 'author', this.state.search);
+        }
     }
 
     pageChange = (event, newPage) => {
         this.setState({
             currentPage: (newPage)
         })
-        this.getBooksPaginated(newPage, this.state.pageSize, this.state.order, this.state.sort);
+        if (this.state.search === "") {
+            this.getBooksPaginated(newPage, this.state.pageSize, this.state.order, this.state.sort);
+        } else {
+            this.searchBooks(newPage, this.state.pageSize, this.state.order, this.state.sort, this.state.search);
+        }
     }
 
     pageSizeChange = (event) => {
@@ -143,7 +176,11 @@ class Home extends React.Component {
             pageSize: parseInt(event.target.value, 10),
             currentPage: 0
         })
-        this.getBooksPaginated(0, parseInt(event.target.value, 10), this.state.order, this.state.sort);
+        if (this.state.search === "") {
+            this.getBooksPaginated(0, parseInt(event.target.value, 10), this.state.order, this.state.sort);
+        } else {
+            this.searchBooks(0, parseInt(event.target.value, 10), this.state.order, this.state.sort, this.state.search);
+        }
     }
 
     async addBook(state) {
@@ -178,7 +215,7 @@ class Home extends React.Component {
         } else {
             await createBook(state.book);
             this.closeAddModal();
-            this.getBooks();
+            this.getBooksPaginated(this.state.currentPage, this.state.pageSize, this.state.order, this.state.sort);
             Swal.fire(
                 'Dodano!',
                 'Książka została dodana.',
@@ -219,7 +256,10 @@ class Home extends React.Component {
         } else {
             await editBook(bookId, book);
             this.closeEditModal();
-            this.getBooks();
+            this.getBooksPaginated(this.state.currentPage, this.state.pageSize, this.state.order, this.state.sort);
+            this.setState({
+                search: ""
+            })
             Swal.fire(
                 'Edytowano!',
                 'Książka została edytowana.',
@@ -230,7 +270,10 @@ class Home extends React.Component {
 
     async deleteBook(bookId) {
         await deleteBook(bookId);
-        this.getBooks();
+        this.getBooksPaginated(this.state.currentPage, this.state.pageSize, this.state.order, this.state.sort);
+        this.setState({
+            search: ""
+        })
     }
 
     async deleteAlert(bookId) {
@@ -255,28 +298,29 @@ class Home extends React.Component {
         })
     }
 
-    async getBooks() {
-        await getBooks().then((res) => {
-            const total = res.data.length;
-            this.setState({ total });
-        }).catch(error => {
-            if (!error.response) {
-                this.errorStatus = 'Network Error';
-            } else {
-                this.errorStatus = error.response.data.message;
-            }
+    async getBooksPaginated(currentPage, pageSize, order, sort) {
+        await getBooksPaginated(currentPage, pageSize, order, sort).then((res) => {
+            const books = res.data.content;
+            const total = res.data.totalElements;
+            this.setState({ 
+                books,
+                total
+            });
         });
     }
 
-    async getBooksPaginated(currentPage, pageSize, order, sort) {
-        await getBooksPaginated(currentPage, pageSize, order, sort).then((res) => {
-            const books = res.data;
-            this.setState({ books });
-        });
+    async searchBooks(currentPage, pageSize, order, sort, search) {
+        await searchBooks(currentPage, pageSize, order, sort, search).then((res) => {
+            const books = res.data.content;
+            const total = res.data.totalElements;
+            this.setState({ 
+                books,
+                total
+             });
+        })
     }
 
     async componentDidMount() {
-        this.getBooks();
         this.getBooksPaginated(this.state.currentPage, this.state.pageSize, this.state.order, this.state.sort);
         await getGenres().then((res) => {
             const genres = res.data;
@@ -289,37 +333,57 @@ class Home extends React.Component {
             <>
                 <div>
                     <h2>Books</h2>
-                    <div className="ButtonDiv">
-                        <AddIcon className="ModalButton" onClick={this.openAddModal} />
+                    <div className="ToolBar">
+                        <div className="SearchBar">
+                            <input type="text" onChange={this.changeSearchBook}/>
+                            <SearchIcon onClick={() => this.searchBooks(this.state.currentPage, this.state.pageSize, this.state.order, this.state.sort, this.state.search)}/>
+                        </div>
+                        <div className="AddButton">
+                            <AddIcon className="ModalButton" onClick={this.openAddModal} />
+                        </div>
                     </div>
                     <table className="BookTable">
                         <thead>
                             <tr>
                                 <th className="TableHeader">
-                                    <div>
+                                    <div onClick={this.sortTitle}>
                                         <span>Tytuł</span>
                                         {(this.state.order === true && this.state.sort === 'title') &&
-                                            <ArrowDropDownIcon onClick={this.sortTitle}/>
+                                            <ArrowDropDownIcon />
                                         }
                                         {(this.state.order === false && this.state.sort === 'title') &&
-                                            <ArrowDropUpIcon onClick={this.sortTitle} />
+                                            <ArrowDropUpIcon />
                                         }
                                         {this.state.sort !== 'title' &&
-                                            <ArrowDropDownIcon onClick={this.sortTitle}/>
+                                            <ArrowDropDownIcon />
                                         }
                                     </div>
                                 </th>
                                 <th className="TableHeader">
-                                    <div>
+                                    <div onClick={this.sortGenre}>
                                         <span>Gatunek</span>
                                         {(this.state.order === true && this.state.sort === 'genre.genreName') &&
-                                            <ArrowDropDownIcon onClick={this.sortGenre}/>
+                                            <ArrowDropDownIcon />
                                         }
                                         {(this.state.order === false && this.state.sort === 'genre.genreName') &&
-                                            <ArrowDropUpIcon onClick={this.sortGenre} />
+                                            <ArrowDropUpIcon />
                                         }
                                         {this.state.sort !== 'genre.genreName' &&
-                                            <ArrowDropDownIcon onClick={this.sortGenre}/>
+                                            <ArrowDropDownIcon />
+                                        }
+                                    </div>
+                                </th>
+                                <th className="TableHeader">
+                                <div onClick={this.sortAuthor}>
+                                        <span>Autor</span>
+                                        {(this.state.order === true && this.state.sort === 'author') &&
+                                            <ArrowDropDownIcon />
+                                        }
+                                        {(this.state.order === false && this.state.sort === 'author') &&
+                                            <ArrowDropUpIcon />
+                                        }
+                                        {this.state.sort !== 'author' &&
+                                            <ArrowDropDownIcon />
                                         }
                                     </div>
                                 </th>
@@ -334,6 +398,7 @@ class Home extends React.Component {
                                     <tr key={book.bookId}>
                                         <td>{book.title}</td>
                                         <td>{book.genre.genreName}</td>
+                                        <td>{book.author}</td>
                                         <td className="TableData">
                                             <DescriptionIcon onClick={() => this.openInfoModal(index)} />
                                             <EditIcon onClick={() => this.openEditModal(index, book.bookId)} />

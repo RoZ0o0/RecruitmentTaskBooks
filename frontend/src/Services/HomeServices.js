@@ -8,6 +8,10 @@ export const getBooksPaginated = (page, size, order, sort) => {
     return axios.get(`http://localhost:8080/api/books/getPage?page=` + page + `&size=` + size + `&order=` + order + `&sort=` + sort);
 }
 
+export const searchBooks = (page, size, order, sort, search) => {
+    return axios.get(`http://localhost:8080/api/books/search?page=` + page + `&size=` + size + `&order=` + order + `&sort=` + sort + `&search=` + search);
+}
+
 export const getGenres = () => {
     return axios.get(`http://localhost:8080/api/genres`);
 }

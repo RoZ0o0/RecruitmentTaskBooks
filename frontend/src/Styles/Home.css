@@ -13,7 +13,7 @@ a {
   }
 
   .TableHeader {
-    width: calc(100% / 3);
+    width: calc(100% / 4);
   }
 
   .TableHeader svg, .TableHeader span{
@@ -39,7 +39,21 @@ a {
     text-align: center;
   }
 
-  .ButtonDiv, .TablePagination {
+  .ToolBar {
+    display: flex;
+    margin: auto;
+    justify-content: space-between;
+    vertical-align: middle;
+    align-items: center;
+    width: 80vw;
+    margin-bottom: 2rem;
+  }
+
+  .SearchBar svg {
+    vertical-align: middle;
+  }
+
+  .TablePagination {
     display: flex;
     margin: auto;
     justify-content: flex-end;

@@ -1,12 +1,11 @@
 package recruitment.task.books.controller;
 
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import recruitment.task.books.dto.request.BookRequest;
 import recruitment.task.books.dto.response.BookResponse;
 import recruitment.task.books.service.BookService;
-
-import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -18,11 +17,11 @@ public class BookController {
         this.bookService = bookService;
     }
 
-    @GetMapping()
-    public List<BookResponse> getAll() { return bookService.getAll(); }
-
     @GetMapping("/getPage")
-    public List<BookResponse> getAllPaginated(@RequestParam int page, @RequestParam int size, @RequestParam Boolean order, @RequestParam String sort) { return bookService.getAllPaginated(page, size, order, sort); }
+    public Page<BookResponse> getAllPaginated(@RequestParam int page, @RequestParam int size, @RequestParam Boolean order, @RequestParam String sort) { return bookService.getAllPaginated(page, size, order, sort); }
+
+    @GetMapping("/search")
+    public Page<BookResponse> searchBook(@RequestParam int page, @RequestParam int size, @RequestParam Boolean order, @RequestParam String sort, @RequestParam String search) { return bookService.searchBook(page, size, order, sort, search); }
 
     @GetMapping("/{id}")
     public BookResponse getBookById(@PathVariable Long id) {

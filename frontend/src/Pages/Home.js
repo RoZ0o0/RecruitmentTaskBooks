@@ -346,7 +346,7 @@ class Home extends React.Component {
                     <table className="BookTable">
                         <thead>
                             <tr>
-                                <th className="TableHeader">
+                                <th className="BookHeader">
                                     <div onClick={this.sortTitle}>
                                         <span>Tytuł</span>
                                         {(this.state.order === true && this.state.sort === 'title') &&
@@ -360,7 +360,7 @@ class Home extends React.Component {
                                         }
                                     </div>
                                 </th>
-                                <th className="TableHeader">
+                                <th className="BookHeader">
                                     <div onClick={this.sortGenre}>
                                         <span>Gatunek</span>
                                         {(this.state.order === true && this.state.sort === 'genre.genreName') &&
@@ -374,7 +374,7 @@ class Home extends React.Component {
                                         }
                                     </div>
                                 </th>
-                                <th className="TableHeader">
+                                <th className="BookHeader">
                                 <div onClick={this.sortAuthor}>
                                         <span>Autor</span>
                                         {(this.state.order === true && this.state.sort === 'author') &&
@@ -388,7 +388,7 @@ class Home extends React.Component {
                                         }
                                     </div>
                                 </th>
-                                <th className="TableHeader">
+                                <th className="BookHeader">
                                     Akcja
                                 </th>
                             </tr>
@@ -400,7 +400,7 @@ class Home extends React.Component {
                                         <td>{book.title}</td>
                                         <td>{book.genre.genreName}</td>
                                         <td>{book.author}</td>
-                                        <td className="TableData">
+                                        <td className="BookData">
                                             <DescriptionIcon onClick={() => this.openInfoModal(index)} />
                                             <EditIcon onClick={() => this.openEditModal(index, book.bookId)} />
                                             <DeleteIcon onClick={() => this.deleteAlert(book.bookId)} />

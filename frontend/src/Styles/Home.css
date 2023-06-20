@@ -12,11 +12,11 @@ a {
   border-spacing: 0;
 }
 
-.TableHeader {
+.BookHeader {
   width: calc(100% / 4);
 }
 
-.TableHeader svg, .TableHeader span{
+.BookHeader svg, .TableHeader span{
   vertical-align: middle;
 }
 
@@ -62,7 +62,7 @@ a {
   margin-bottom: 2rem;
 }
 
-.TableData {
+.BookData {
   display: flex;
   margin: auto;
   justify-content: center;

@@ -28,12 +28,12 @@ class Metrics extends React.Component {
                     <table className="MetricTable">
                         <thead>
                             <tr>
-                                <th className="TableHeader">
+                                <th className="MetricHeader">
                                     <div>
                                         <span>Status</span>
                                     </div>
                                 </th>
-                                <th className="TableHeader">
+                                <th className="MetricHeader">
                                     <div>
                                         <span>Liczba</span>
                                     </div>

@@ -7,20 +7,13 @@
     border-spacing: 0;
   }
 
-.TableHeader {
+.MetricHeader {
     width: calc(100% / 2);
 }
 
-.TableHeader svg, .TableHeader span{
+.MetricHeader svg, .TableHeader span{
     vertical-align: middle;
 }
-
-.TableData {
-    display: flex;
-    margin: auto;
-    justify-content: center;
-    align-items: center;
-  }
   
 .MetricTable thead tr th{
     background-color: gray;

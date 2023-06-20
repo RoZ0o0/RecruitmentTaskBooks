@@ -9,20 +9,16 @@ function BookInfoModal({state, closeInfoModal}) {
                 open={state.openInfo}
                 onClose={closeInfoModal}
             >
-                <Box className='ModalBox'>
+                <Box className='ModalBox ModalBoxInfo'>
                     <h1>Książka</h1>
-                    <div className='Title'>
-                        <label>Tytuł: </label><p>{state.openedBook.title}</p>
-                    </div>
-                    <div className='Genre'>
-                        <label>Gatunek: </label>
+                    <div className='Info'>
+                        <p>"{state.openedBook.title}",</p>
+                        <p>{state.openedBook.author}, </p>
                         <p>{state.openedBook.genreName}</p>
                     </div>
-                    <div className='Author'>
-                        <label>Autor: </label><p>{state.openedBook.author}</p>
-                    </div>
-                    <div className='Description'>
-                        <label>Opis: </label><textarea name="description" value={state.openedBook.description} readOnly cha/>
+                    <div className='InfoDescription'>
+                        <h2>Opis</h2>
+                        <p>{state.openedBook.description}</p>
                     </div>
                 </Box>
             </Modal>

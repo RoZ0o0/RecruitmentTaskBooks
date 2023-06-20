@@ -32,8 +32,8 @@ function AddBookModal({state, changeBookCreate, closeAddModal, addBook}) {
                     </div>
                     <div className='AddBook'>
                         <button onClick={() => addBook(state)}>Dodaj książkę</button>
+                        {state.error && <p>{ state.error }</p> }
                     </div>
-                    {state.error && <p>{ state.error }</p> }
                 </Box>
             </Modal>
         </>

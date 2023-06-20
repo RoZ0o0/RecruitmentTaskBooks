@@ -2,14 +2,12 @@ package recruitment.task.books.validator;
 
 import org.springframework.stereotype.Component;
 import recruitment.task.books.dto.request.BookRequest;
-import recruitment.task.books.entity.Book;
 import recruitment.task.books.repository.BookRepository;
 import recruitment.task.books.repository.GenreRepository;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 @Component
 public class BookValidator {

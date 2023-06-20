@@ -1,15 +1,13 @@
 import { NavLink } from 'react-router-dom';
 import "../Styles/NavBar.css";
+import HomeIcon from '@mui/icons-material/Home';
+import TableChartIcon from '@mui/icons-material/TableChart';
 
 function NavBar() {
     return (
         <nav className='NavBar'>
-            <div className="NavBar-itemDiv">
-                <NavLink to='/' className="NavBar-item">{<span>Strona główna</span>}</NavLink>
-            </div>
-            <div className="NavBar-itemDiv">
-                <NavLink to='/metrics' className="NavBar-item">{<span>Żądania</span>}</NavLink>
-            </div>
+            <NavLink to='/' className="NavBar-item"><HomeIcon />{<span>Strona główna</span>}</NavLink>
+            <NavLink to='/metrics' className="NavBar-item"><TableChartIcon />{<span>Żądania</span>}</NavLink>
         </nav>
     )
 }

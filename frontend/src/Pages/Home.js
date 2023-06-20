@@ -218,6 +218,9 @@ class Home extends React.Component {
             await createBook(state.book);
             this.closeAddModal();
             this.getBooksPaginated(this.state.currentPage, this.state.pageSize, this.state.order, this.state.sort);
+            this.setState({
+                search: ""
+            })
             Swal.fire(
                 'Dodano!',
                 'Książka została dodana.',
@@ -338,14 +341,15 @@ class Home extends React.Component {
                     <h2>Książki</h2>
                     <div className="ToolBar">
                         <div className="SearchBar">
-                            <input type="text" onChange={this.changeSearchBook}/>
+                            <input type="text" value={this.state.search} onChange={this.changeSearchBook}/>
                             <SearchIcon onClick={() => this.searchBooks(this.state.currentPage, this.state.pageSize, this.state.order, this.state.sort, this.state.search)}/>
                         </div>
                         <div className="AddButton">
                             <AddIcon className="ModalButton"
                                 sx={{
-                                    backgroundColor: "#3dc44f",
-                                    borderRadius: 1
+                                    backgroundColor: "#4be960",
+                                    borderRadius: 1,
+                                    padding: 0.5
                                 }} 
                                 onClick={this.openAddModal} />
                         </div>

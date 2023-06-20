@@ -7,3 +7,8 @@
 - Baza: PostgreSQL 15
 
 Należy stworzyć bazę danych o nazwie "books", aby aplikacja działała poprawnie.
+
+Aby uruchomić aplikację, należy w katalogu "app" wykonać komendę:
+```
+mvn spring-boot:run -Pprod
+```

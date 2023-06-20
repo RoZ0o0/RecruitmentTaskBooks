@@ -49,7 +49,8 @@ class Home extends React.Component {
 
     openAddModal = () => {
         this.setState({
-            openAdd: true
+            openAdd: true,
+            error: ""
         })
     }
 
@@ -66,7 +67,7 @@ class Home extends React.Component {
             openedBook: {
                 title: this.state.books[index].title,
                 author: this.state.books[index].author,
-                genreId: this.state.books[index].genre.genreId,
+                genreName: this.state.books[index].genre.genreName,
                 description: this.state.books[index].description,
             }
         })
@@ -82,6 +83,7 @@ class Home extends React.Component {
         this.setState({
             openEdit: true,
             editId: bookId,
+            error: "",
             openedBook: {
                 title: this.state.books[index].title,
                 author: this.state.books[index].author,
@@ -340,7 +342,12 @@ class Home extends React.Component {
                             <SearchIcon onClick={() => this.searchBooks(this.state.currentPage, this.state.pageSize, this.state.order, this.state.sort, this.state.search)}/>
                         </div>
                         <div className="AddButton">
-                            <AddIcon className="ModalButton" onClick={this.openAddModal} />
+                            <AddIcon className="ModalButton"
+                                sx={{
+                                    backgroundColor: "#3dc44f",
+                                    borderRadius: 1
+                                }} 
+                                onClick={this.openAddModal} />
                         </div>
                     </div>
                     <table className="BookTable">

@@ -35,6 +35,34 @@ a {
   border-radius: 0.5rem;
 }
 
+.ModalBox .Title, .Genre, .Author, .Description {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.Description > textarea {
+  width: 15rem;
+  height: 5rem;
+  resize: none;
+  padding: 0.5rem;
+  border-radius: 0.2rem;
+}
+
+.ModalBox .Title > input, .Genre > select, .Author > input {
+  padding: 0.2rem;
+  border-radius: 0.2rem;
+  border: 1px solid;
+}
+
+.ModalBox .AddBook, .EditBook {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
 .ModalBox h1 {
   text-align: center;
 }

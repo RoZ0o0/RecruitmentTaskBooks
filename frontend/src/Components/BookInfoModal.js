@@ -11,21 +11,18 @@ function BookInfoModal({state, closeInfoModal}) {
             >
                 <Box className='ModalBox'>
                     <h1>Książka</h1>
-                    <div>
-                        <label>Tytuł</label><p>{state.openedBook.title}</p>
+                    <div className='Title'>
+                        <label>Tytuł: </label><p>{state.openedBook.title}</p>
                     </div>
-                    <div>
-                        <label>Gatunek</label>
-                        <select name="genreId" value={state.openedBook.genreId} readOnly>
-                            <option value="1">Horror</option>
-                            <option value="2">Dramat</option>
-                        </select>
+                    <div className='Genre'>
+                        <label>Gatunek: </label>
+                        <p>{state.openedBook.genreName}</p>
                     </div>
-                    <div>
-                        <label>Autor</label><p>{state.openedBook.author}</p>
+                    <div className='Author'>
+                        <label>Autor: </label><p>{state.openedBook.author}</p>
                     </div>
-                    <div>
-                        <label>Opis</label><textarea name="description" value={state.openedBook.description} readOnly />
+                    <div className='Description'>
+                        <label>Opis: </label><textarea name="description" value={state.openedBook.description} readOnly cha/>
                     </div>
                 </Box>
             </Modal>

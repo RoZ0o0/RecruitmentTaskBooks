@@ -1,8 +1,14 @@
-DELETE
-FROM books;
-
-ALTER SEQUENCE books_book_id_seq
-    RESTART WITH 1;
+CREATE TABLE IF NOT EXISTS books (
+    book_id serial PRIMARY KEY NOT NULL,
+    title VARCHAR(50) NOT NULL,
+    genre_id INT NOT NULL,
+    author VARCHAR(50) NOT NULL,
+    description VARCHAR(255) NOT NULL,
+    CONSTRAINT fk_genre
+                   FOREIGN KEY (genre_id)
+                   REFERENCES genre
+                   ON DELETE SET NULL
+);
 
 INSERT INTO books("title", "genre_id", "author", "description")
 VALUES ('It', 1, 'Stephen King', 'Grupa przyjaciół staje w obliczu tajemniczego potwora, który prześladuje ich od dzieciństwa. Przeskakując między przeszłością a teraźniejszością, próbują rozwiązać zagadkę i ostatecznie stawić czoła swoim największym lękom.'),

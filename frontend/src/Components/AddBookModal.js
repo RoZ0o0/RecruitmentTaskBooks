@@ -11,11 +11,11 @@ function AddBookModal({state, changeBookCreate, closeAddModal, addBook}) {
             >
                 <Box className='ModalBox'>
                     <h1>Dodaj książkę</h1>
-                    <div>
-                        <label>Tytuł</label><input type="text" name="title" onChange={changeBookCreate} />
+                    <div className='Title'>
+                        <label>Tytuł: </label><input type="text" name="title" onChange={changeBookCreate} />
                     </div>
-                    <div>
-                        <label>Gatunek</label>
+                    <div className='Genre'>
+                        <label>Gatunek: </label>
                         <select name="genreId" onChange={changeBookCreate}>
                             {
                                 state.genres.map((genre) => 
@@ -24,13 +24,15 @@ function AddBookModal({state, changeBookCreate, closeAddModal, addBook}) {
                             }
                         </select>
                     </div>
-                    <div>
-                        <label>Autor</label><input type="text" name="author" onChange={changeBookCreate} />
+                    <div className='Author'>
+                        <label>Autor: </label><input type="text" name="author" onChange={changeBookCreate} />
                     </div>
-                    <div>
-                        <label>Opis</label><textarea name="description" onChange={changeBookCreate} />
+                    <div className='Description'>
+                        <label>Opis: </label><textarea name="description" onChange={changeBookCreate} />
                     </div>
-                    <button onClick={() => addBook(state)}>Dodaj książkę</button>
+                    <div className='AddBook'>
+                        <button onClick={() => addBook(state)}>Dodaj książkę</button>
+                    </div>
                     {state.error && <p>{ state.error }</p> }
                 </Box>
             </Modal>

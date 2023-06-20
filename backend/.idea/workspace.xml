@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="9119232a-a433-4b84-aea9-94341ca18182" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/recruitment/task/books/BooksApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/recruitment/task/books/components/RequestFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/recruitment/task/books/controller/BookController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/recruitment/task/books/controller/GenreController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/recruitment/task/books/controller/MetricController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/recruitment/task/books/dto/request/BookRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/recruitment/task/books/dto/request/GenreRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/recruitment/task/books/dto/response/BookResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/recruitment/task/books/dto/response/GenreResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/recruitment/task/books/entity/Book.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/recruitment/task/books/entity/Genre.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/recruitment/task/books/mapper/BookMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/recruitment/task/books/mapper/GenreMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/recruitment/task/books/repository/BookRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/recruitment/task/books/repository/GenreRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/recruitment/task/books/service/BookService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/recruitment/task/books/service/BookServiceimpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/recruitment/task/books/service/GenreService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/recruitment/task/books/service/GenreServiceimpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/recruitment/task/books/service/MetricService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/recruitment/task/books/service/MetricServiceimpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/recruitment/task/books/validator/BookValidator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/db/migration/V1_1__createGenreTable.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/db/migration/V2__createBooksTable.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/recruitment/task/books/book/init.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/recruitment/task/books/book/teardown.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/recruitment/task/books/book/BookTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/public/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/public/logo192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/public/logo512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/public/manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/public/robots.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/App.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/App.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/App.test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/Components/AddBookModal.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/Components/BookInfoModal.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/Components/EditBookModal.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/Components/NavBar.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/Pages/Home.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/Pages/Metrics.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/Services/HomeServices.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/Services/MetricsServices.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/Styles/Home.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/Styles/Metrics.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/Styles/NavBar.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/reportWebVitals.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/setupTests.js" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="usePluginRegistry" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2RCOqV0sl5dBLRXsOqSunUfFg6Z" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="postgresql" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="extract.method.default.visibility" value="private" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../app" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\JavaProjects\RecruitmentTaskBooks\backend\src\main\resources\recruitment\task\books\book" />
+    </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvn spring-boot:run" />
+      <command value="mvn clean install" />
+      <command value="mvn clean" />
+      <command value="mvn clean -Pprod" />
+      <command value="mvn clean install -Pprod" />
+      <command value="mvn spring-boot:run -Pprod" />
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.BooksApplication">
+    <configuration name="BookTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="books" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="recruitment.task.books.book.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="recruitment.task.books.book" />
+      <option name="MAIN_CLASS_NAME" value="recruitment.task.books.book.BookTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BookTests.PostRequest_createBook_thenReturns201" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="books" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="recruitment.task.books.book.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="recruitment.task.books.book" />
+      <option name="MAIN_CLASS_NAME" value="recruitment.task.books.book.BookTests" />
+      <option name="METHOD_NAME" value="PostRequest_createBook_thenReturns201" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BookTests.PostRequest_createBook_thenReturns422" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="books" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="recruitment.task.books.book.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="recruitment.task.books.book" />
+      <option name="MAIN_CLASS_NAME" value="recruitment.task.books.book.BookTests" />
+      <option name="METHOD_NAME" value="PostRequest_createBook_thenReturns422" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BookTests.PutRequest_updateBook_thenReturns200" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="books" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="recruitment.task.books.book.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="recruitment.task.books.book" />
+      <option name="MAIN_CLASS_NAME" value="recruitment.task.books.book.BookTests" />
+      <option name="METHOD_NAME" value="PutRequest_updateBook_thenReturns200" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BookTests.PutRequest_updateBook_thenReturns422" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="books" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="recruitment.task.books.book.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="recruitment.task.books.book" />
+      <option name="MAIN_CLASS_NAME" value="recruitment.task.books.book.BookTests" />
+      <option name="METHOD_NAME" value="PutRequest_updateBook_thenReturns422" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BooksApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="books" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="recruitment.task.books.BooksApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.BookTests" />
+        <item itemvalue="JUnit.BookTests.PutRequest_updateBook_thenReturns422" />
+        <item itemvalue="JUnit.BookTests.PostRequest_createBook_thenReturns422" />
+        <item itemvalue="JUnit.BookTests.PutRequest_updateBook_thenReturns200" />
+        <item itemvalue="JUnit.BookTests.PostRequest_createBook_thenReturns201" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9119232a-a433-4b84-aea9-94341ca18182" name="Changes" comment="" />
+      <created>1686750788673</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1686750788673</updated>
+      <workItem from="1686750790034" duration="3270000" />
+      <workItem from="1686835319357" duration="9378000" />
+      <workItem from="1686863046665" duration="64000" />
+      <workItem from="1686863201951" duration="3659000" />
+      <workItem from="1686913322498" duration="14215000" />
+      <workItem from="1686945029619" duration="664000" />
+      <workItem from="1687000649886" duration="6636000" />
+      <workItem from="1687038833743" duration="1388000" />
+      <workItem from="1687092592802" duration="14310000" />
+      <workItem from="1687185906782" duration="12566000" />
+      <workItem from="1687210651228" duration="12135000" />
+      <workItem from="1687224247382" duration="880000" />
+      <workItem from="1687260041582" duration="7294000" />
+      <workItem from="1687275013794" duration="4840000" />
+      <workItem from="1687279949332" duration="1732000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+</project>
